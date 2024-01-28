@@ -1,1 +1,8 @@
-*
+*{margin:0;padding:0;box-sizing:border-box;}
+i.text{font-size:0.7em;}
+i.text.prime{color:var(--prime);}
+i.text.sec{color:var(--gray_500);}
+i.text.success{color:var(--success);}
+i.text.error{color:var(--error);}
+i.text.warn{color:var(--warn);}
+i.text.info{color:var(--info);}
