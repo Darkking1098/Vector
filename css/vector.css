@@ -38,7 +38,7 @@ section.hero .bg{inset:0;top:calc(-1*var(--header));position:absolute;z-index:-1
 .pos-sti {position: sticky;}
 img {object-fit: cover;display: block;max-width: 100%;}
 canvas {display: block;}
-a.btn {text-decoration: none;color: inherit;cursor: pointer;display: block;}
+a.btn {text-decoration: none;color: inherit;cursor: pointer;display: inline-block;}
 i.text {font-size:0.7em;}
 i.text.prime {color:var(--prime);}
 i.text.sec {color:var(--gray_500);}
