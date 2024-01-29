@@ -3,12 +3,13 @@
 body {display: flex;min-height: 100%;flex-direction: column;font-size: 1.6rem;}
 main {flex-grow: 1;--header:70px;}
 body:has(.sidebar_layout) {overflow: hidden;min-height: unset;height: 100%;}
+
 .sidebar_layout {flex-grow: 1;display: flex;overflow: hidden;height: 100%;}
 .sidebar_layout .sidebar {width: 280px;display: flex;flex-direction: column;flex-shrink: 0;}
 .sidebar_layout .main_content {flex-grow: 1;display: flex;flex-direction: column;overflow-y: auto;}
 
-.filter_layout{display: flex;}
-.filter_layout .sidebar{display: flex;flex-direction:column;height:max-content;position:sticky;top:calc(var(--height) + var(--buff, 20px))}
+.filter_layout {display: flex;}
+.filter_layout .sidebar {display: flex;flex-direction:column;height:max-content;position:sticky;top:calc(var(--height) + var(--buff, 20px))}
 .filter_layout .main_content {flex-grow: 1;}
 
 #root {flex-grow: 1;display: flex;flex-direction: column;}
