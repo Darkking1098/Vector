@@ -16,8 +16,8 @@ section.hero{position:relative;isolation:isolate;}
 section.hero .bg{inset:0;top:calc(-1*var(--header));position:absolute;z-index:-1;}
 
 #root {flex-grow: 1;display: flex;flex-direction: column;}
-.rflex {display:flex;flex-firection:row;}
-.cflex {display:flex;flex-firection:column;}
+.rflex {display:flex;flex-direction:row;}
+.cflex {display:flex;flex-direction:column;}
 .wrap {flex-wrap: wrap;}
 .ais {align-items: start;}
 .aie {align-items: end;}
