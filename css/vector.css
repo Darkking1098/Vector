@@ -7,16 +7,38 @@ body:has(.sidebar_layout) {overflow: hidden;min-height: unset;height: 100%;}
 .sidebar_layout .sidebar {width: 280px;display: flex;flex-direction: column;flex-shrink: 0;}
 .sidebar_layout .main_content {flex-grow: 1;display: flex;flex-direction: column;overflow-y: auto;}
 #root {flex-grow: 1;display: flex;flex-direction: column;}
-i.text{font-size:0.7em;}
-i.text.prime{color:var(--prime);}
-i.text.sec{color:var(--gray_500);}
-i.text.success{color:var(--success);}
-i.text.error{color:var(--error);}
-i.text.warn{color:var(--warn);}
-i.text.info{color:var(--info);}
+.rflex {display:flex;flex-firection:row;}
+.cflex {display:flex;flex-firection:column;}
+.wrap {flex-wrap: wrap;}
+.ais {align-items: start;}
+.aie {align-items: end;}
+.aic {align-items: center;}
+.ass {align-self: start;}
+.ase {align-self: end;}
+.asc {align-self: center;}
+.asst {align-self: stretch;}
+.jcs {justify-content: start;}
+.jce {justify-content: end;}
+.jcc {justify-content: center;}
+.jcsb {justify-content: space-between;}
+.jcsa {justify-content: space-around;}
+.jcse {justify-content: space-evenly;}
+.pos-abs {position: absolute;}
+.pos-fix {position: fixed;}
+.pos-rel {position: relative;}
+.pos-sti {position: sticky;}
+img {object-fit: cover;display: block;max-width: 100%;}
+canvas {display: block;}
+a.btn {text-decoration: none;color: inherit;cursor: pointer;display: block;}
+i.text {font-size:0.7em;}
+i.text.prime {color:var(--prime);}
+i.text.sec {color:var(--gray_500);}
+i.text.success {color:var(--success);}
+i.text.error {color:var(--error);}
+i.text.warn {color:var(--warn);}
+i.text.info {color:var(--info);}
 @media screen and (max-width: 800px) {
   .sidebar_layout .sidebar {position: absolute;height: 100%;right: 0;transform: translateX(100%);transition: all 0.4s;z-index: 99;}
   .sidebar_layout .sidebar.active {transform: translateX(0);box-shadow: 0 0 80px 0 #00000088;}
   .sidebar_layout .main_content header {display: flex;align-items: center;}
 }
-
