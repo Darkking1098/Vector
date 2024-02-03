@@ -1,0 +1,17 @@
+{
+    "name": "vector/spider",
+    "description": "Scalable and Expandable web admin panel.",
+    "type": "librry",
+    "autoload": {
+        "psr-4": {
+            "Vector\\Spider\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Darkking1098",
+            "email": "ajaykumarraven147@gmail.com"
+        }
+    ],
+    "require": {}
+}
