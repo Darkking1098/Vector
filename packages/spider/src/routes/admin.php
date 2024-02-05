@@ -8,7 +8,7 @@ use Vector\Spider\Http\Controllers\AdminControllers\SEOController;
 use Vector\Spider\Http\Controllers\AdminControllers\UserController;
 use Vector\Spider\Http\Middlewares\AdminAuth;
 
-Route::get('', fn () => view('admin.index'))->name('admin_home');
+Route::get('', fn () => view('Spider::admin.index'))->name('admin_home');
 Route::get('index', fn () => redirect()->route('admin_home'));
 
 Route::controller(AdminPageController::class)->prefix('page')->group(function () {

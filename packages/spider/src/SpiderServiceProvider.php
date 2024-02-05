@@ -21,7 +21,7 @@ class SpiderServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Some web routes for promotion
+        // Some Views for promotion
         $this->loadViewsFrom(__DIR__ . "/views","Spider");
 
         // Some web routes for promotion
@@ -29,7 +29,7 @@ class SpiderServiceProvider extends ServiceProvider
 
         // Admin Routes
         Route::
-            // middleware(['web',AdminAuth::class])->
+            middleware(['web',AdminAuth::class])->
             prefix('admin')->
             group(__DIR__ . '/routes/admin.php')->
             group(base_path('routes/admin.php'));

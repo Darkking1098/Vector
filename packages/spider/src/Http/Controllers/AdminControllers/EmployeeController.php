@@ -2,17 +2,38 @@
 
 namespace Vector\Spider\Http\Controllers\AdminControllers;
 
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Vector\Spider\database\Models\AdminRole;
 use Vector\Spider\database\Models\Employee;
 use Vector\Spider\Http\Controllers\Controller;
 
 class EmployeeController extends Controller
 {
+    function get_allemps()
+    {
+        return Employee::with('admin_role')->get()->toArray();
+    }
+    function get_empById($empId)
+    {
+        return Employee::with('admin_role')->find($empId)->toArray();
+    }
+    function get_empByUsername($empUsername)
+    {
+        return Employee::where('emp_username', $empUsername)->with('admin_role')->first()->toArray();
+    }
+    function get_self()
+    {
+        return self::get_empById(session()->get('adminId'));
+    }
+    function get_permitted_pages()
+    {
+        $role = self::get_self()['admin_role'];
+        return $role['role_permissions'];
+    }
+
     function ui_login()
     {
-        $data = [];
-        return view('', $data);
+        return view('Spider::Admin.login');
     }
     function ui_view_emps()
     {
@@ -47,17 +68,25 @@ class EmployeeController extends Controller
 
     function web_login(Request $request)
     {
-        // To-Do
-        $params = null;
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        $params = [
+            "username" => $request->username,
+            "password" => $request->password,
+        ];
         $result = self::login($params);
+        if ($result['success']) {
+            session()->put("adminId", $result['empId']);
+            return redirect()->route('admin_home');
+        }
         return self::web_response($result);
     }
     function web_logout(Request $request)
     {
-        // To-Do
-        $params = null;
-        $result = self::logout($params);
-        return self::web_response($result);
+        self::logout();
+        return redirect()->route('admin_login');
     }
     function web_toggle_status(Request $request, $empId)
     {
@@ -145,12 +174,20 @@ class EmployeeController extends Controller
 
     private function login($params)
     {
-        $employee = null;
-        return ["success" => $employee];
+        $employee = Employee::where('emp_username', $params['username'])->first();
+        if ($employee) {
+            $ed = $employee->getOriginal();
+            if (!$ed['emp_status']) {
+                return ["success" => false, "message" => "Contact HR"];
+            } else if ($ed['emp_password'] == $params['password']) {
+                return ["success" => true, "empId" => $ed['id']];
+            }
+        }
+        return ["success" => false, "message" => "Invalid Credentials"];
     }
-    private function logout($empId)
+    private function logout()
     {
-        return ["success" => session()->forget([])];
+        return ['success' => session()->flush()];
     }
     private function create_emp($params)
     {

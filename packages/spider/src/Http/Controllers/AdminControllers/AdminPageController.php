@@ -9,6 +9,79 @@ use Vector\Spider\database\Models\AdminPageGroup;
 
 class AdminPageController extends Controller
 {
+    static function get_pages()
+    {
+        return AdminPage::all()->toArray();
+    }
+    static function get_allowed_pages()
+    {
+        $allowed = [];
+        $empController = new EmployeeController;
+        $permission = $empController->get_permitted_pages();
+        if ($permission[0] == "*") return self::get_pages();
+        foreach (self::get_pages() as $page) {
+            if (in_array($page['id'], $permission)) $allowed[] = $page;
+        }
+        return $allowed;
+    }
+    static function get_display_pages()
+    {
+        $allowed = [];
+        foreach (self::get_allowed_pages() as $page) {
+            if ($page['page_status'] && $page['page_can_display'])
+            $allowed[] = $page;
+        }
+        return $allowed;
+    }
+    static function get_pagegroups()
+    {
+        return AdminPagegroup::orderBy('pagegroup_index', 'asc')->get()->toArray();
+    }
+    static function get_pages_in_group()
+    {
+        $groups = [];
+        foreach (AdminPagegroup::with('admin_pages')->get()->toArray() as $group)
+            if ($group['admin_pages']) $groups[] = $group;
+        return $groups;
+    }
+    static function get_allowed_pages_in_group()
+    {
+        $groups = [];
+        $empController = new EmployeeController;
+        $permission = $empController->get_permitted_pages();
+        $tmp_groups = self::get_pages_in_group();
+        if ($permission[0] == "*") return $tmp_groups;
+        for ($i = 0; $i < count($tmp_groups); $i++) {
+            $allowed = [];
+            foreach ($tmp_groups[$i]['adminpages'] as $page) {
+                if (in_array($page['id'], $permission))
+                    $allowed[] = $page;
+            }
+            if ($allowed) {
+                $tmp_groups[$i]['adminpages'] = $allowed;
+                $groups[] = $tmp_groups[$i];
+            }
+        }
+        return $groups;
+    }
+    static function get_display_pages_in_group()
+    {
+        $groups = [];
+        $tmp_groups = self::get_allowed_pages_in_group();
+        for ($i = 0; $i < count($tmp_groups); $i++) {
+            $allowed = [];
+            foreach ($tmp_groups[$i]['admin_pages'] as $page) {
+                if ($page['page_status'] && $page['page_can_display'])
+                $allowed[] = $page;
+            }
+            if ($allowed) {
+                $tmp_groups[$i]['admin_pages'] = $allowed;
+                $groups[] = $tmp_groups[$i];
+            }
+        }
+        return $groups;
+    }
+
     function ui_view_pages()
     {
         $data = [];
