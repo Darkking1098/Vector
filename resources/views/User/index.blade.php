@@ -10,8 +10,6 @@
 
 <body>
     <h1>Cool Dude</h1>
-    <x-popup></x-popup>
-    <x-Spider::intro></x-Spider::intro>
 </body>
 
 </html>
