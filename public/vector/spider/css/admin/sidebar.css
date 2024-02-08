@@ -75,3 +75,15 @@
     color: white;
     background: var(--error_dark);
 }
+/* Header goes here */
+.sidebar_layout .main_content header {
+    background: var(--primary);
+    height: 60px;
+    color: var(--prime_text_light);
+    flex-shrink: 0;
+    padding: 0 20px;
+}
+.sidebar_layout .main_content header .brand {
+    height: 100%;
+    padding:10px 20px;
+}

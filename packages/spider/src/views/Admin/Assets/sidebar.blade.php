@@ -4,16 +4,19 @@
 @endphp
 <div class="sidebar">
     <a href="{{ url('') }}" class="brand">
-        <img src="{{ url('/images/logo.png') }}" alt="">
+        <img src="{{ url('vector/spider/images/logo.png') }}" alt="">
     </a>
     <ul class="main_nav">
-        <li class="group_head">
+        <li @class([
+                'group_head',
+                'active' => $current['current_slug']=='',
+            ])>
             <a href="{{ url('/admin') }}" class="group_title">Dashboard</a>
         </li>
         @foreach ($groups as $group)
             <li @class([
                 'group_head',
-                'active' => $group['id'] == ($page['page_group'] ?? ''),
+                'active' => $group['id'] == ($current['page_group'] ?? ''),
             ])>
                 <a class="group_title rflex jcsb aic">
                     {{ $group['page_group_title'] }}

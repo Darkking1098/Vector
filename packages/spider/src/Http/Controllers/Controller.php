@@ -15,6 +15,7 @@ class Controller extends BaseController
 
     // Setting default location to store files
     private $file_path;
+    protected const API_LIMIT = 25;
 
     // Constructor to initialize the property
     public function __construct()
@@ -30,7 +31,7 @@ class Controller extends BaseController
         if (!is_dir($x = $path ?? $this->file_path)) mkdir($x, 0777, true);
 
         // Rename file to new name
-        $img = Str::random(5) . now()->timestamp . '.' . $file->getClientOriginalExtension();
+        $img = Str::random(5) . time() . '.' . $file->getClientOriginalExtension();
 
         // Returning new filename with action status
         return [
@@ -40,15 +41,28 @@ class Controller extends BaseController
     }
 
     // Use to send web response
-    function web_response($result)
+    static function web_response($result)
     {
         session()->flash('result', $result);
         return redirect()->back();
     }
 
     // Use to send api response with some default data
-    function api_response($result)
+    static function api_response($result)
     {
-        return response()->json($result + ["timestamp" => now()->timestamp]);
+        return response()->json($result + ["timestamp" => time()]);
+    }
+
+    // Table Response
+    static function table_response($data, $model)
+    {
+        $data['total_entries'] = $model::count();
+        $data['current_page'] = request()->page ?? 0;
+        $data['page_limit'] = request()->limit ?? self::API_LIMIT;
+        $data['total_pages'] = ceil($data['total_entries'] / $data['page_limit']);
+        $data['fetched_from'] = request()->from ?? 0;
+        $data['has_more'] = $data['total_entries'] > $data['fetched_from'] + $data['page_limit'];
+
+        return self::api_response($data);
     }
 }

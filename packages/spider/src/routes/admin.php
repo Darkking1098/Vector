@@ -57,7 +57,7 @@ Route::controller(BlogController::class)->prefix('blog')->group(function () {
         });
     });
 });
-Route::controller(EmployeeController::class)->prefix('employee')->group(function () {
+Route::controller(EmployeeController::class)->group(function () {
     Route::withoutMiddleware(AdminAuth::class)->group(function () {
         Route::prefix('login')->group(function () {
             Route::get('', 'ui_login')->name('admin_login');

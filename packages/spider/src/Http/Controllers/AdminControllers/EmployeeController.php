@@ -2,10 +2,13 @@
 
 namespace Vector\Spider\Http\Controllers\AdminControllers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Vector\Spider\database\Models\AdminRole;
 use Vector\Spider\database\Models\Employee;
 use Vector\Spider\Http\Controllers\Controller;
+use Vector\Spider\Http\Security\JWT;
 
 class EmployeeController extends Controller
 {
@@ -33,7 +36,7 @@ class EmployeeController extends Controller
 
     function ui_login()
     {
-        return view('Spider::Admin.login');
+        return session()->has('adminId')?redirect()->route('admin_home'):view('Spider::Admin.login');
     }
     function ui_view_emps()
     {
@@ -78,7 +81,7 @@ class EmployeeController extends Controller
         ];
         $result = self::login($params);
         if ($result['success']) {
-            session()->put("adminId", $result['empId']);
+            session()->put("adminId", $result['adminId']);
             return redirect()->route('admin_home');
         }
         return self::web_response($result);
@@ -178,12 +181,14 @@ class EmployeeController extends Controller
         if ($employee) {
             $ed = $employee->getOriginal();
             if (!$ed['emp_status']) {
-                return ["success" => false, "message" => "Contact HR"];
+                return ["success" => false, "msg" => "Contact HR"];
             } else if ($ed['emp_password'] == $params['password']) {
-                return ["success" => true, "empId" => $ed['id']];
+                $jwt= JWT::generate(["adminId" => $ed['id']], false);
+                Cookie::queue('jwt', $jwt);
+                return ["success" => true, "adminId" => $ed['id']];
             }
         }
-        return ["success" => false, "message" => "Invalid Credentials"];
+        return ["success" => false, "msg" => "Invalid Credentials"];
     }
     private function logout()
     {

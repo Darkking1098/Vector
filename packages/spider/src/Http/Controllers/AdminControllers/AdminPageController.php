@@ -13,6 +13,10 @@ class AdminPageController extends Controller
     {
         return AdminPage::all()->toArray();
     }
+    static function get_pages_with_group()
+    {
+        return AdminPage::with('admin_page_group')->get()->toArray();
+    }
     static function get_allowed_pages()
     {
         $allowed = [];
@@ -84,7 +88,8 @@ class AdminPageController extends Controller
 
     function ui_view_pages()
     {
-        $data = [];
+        $data = ["pages"=>self::get_pages_with_group()];
+        dd(self::table_response($data,AdminPage::class));
         return view('Spider::Admin.AdminPage.view_pages', $data);
     }
     function ui_create_page()

@@ -37,7 +37,7 @@
             </div>
             @if (session()->has('result'))
                 <i class="text error">
-                    <b>{{ session()->get('result')['message'] }}</b>
+                    <b>{{ session()->get('result')['msg'] }}</b>
                 </i>
             @endif
             <button type="submit" class="btn">Validate</button>

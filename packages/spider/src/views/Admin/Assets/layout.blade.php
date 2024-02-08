@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url('css/vector.css') }}">
+    <link rel="stylesheet" href="{{ url('icon/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ url('vector/spider/css/admin/sidebar.css') }}">
     <link rel="stylesheet" href="{{ url('vector/spider/css/admin/theme.css') }}">
     @stack('css')
@@ -19,9 +20,10 @@
             @include('Spider::Admin.Assets.header')
             @yield('main')
             @include('Spider::Admin.Assets.footer')
+            @stack('extra')
         </div>
     </div>
-    <script src="{{url('js/vector.js')}}"></script>
+    <script src="{{ url('js/vector.js') }}"></script>
     @stack('js')
 </body>
 

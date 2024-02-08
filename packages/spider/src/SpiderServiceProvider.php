@@ -5,6 +5,7 @@ namespace Vector\Spider;
 use Carbon\Laravel\ServiceProvider;
 use Vector\Spider\Http\Middlewares\AdminAuth;
 use Illuminate\Support\Facades\Route;
+use Vector\Spider\Http\Middlewares\APIAuth;
 
 class SpiderServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,13 @@ class SpiderServiceProvider extends ServiceProvider
             prefix('admin')->
             group(__DIR__ . '/routes/admin.php')->
             group(base_path('routes/admin.php'));
+
+            // Admin Routes
+        Route::
+            middleware(['api',APIAuth::class])->
+            prefix('api/admin')->
+            group(__DIR__ . '/routes/admin_api.php')->
+            group(base_path('routes/admin_api.php'));
 
         // Copy resources to spider folder
         $this->publishes([
