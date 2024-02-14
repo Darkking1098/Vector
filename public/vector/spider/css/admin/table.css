@@ -51,10 +51,27 @@ table tfoot .brand img {
     padding: 5px;
     height: 25px;
 }
+table tfoot .data_info {
+    display: flex;
+}
+table tfoot .data_info .paginate {
+    display: flex;
+}
+table tfoot .data_info input {
+    min-width: min-content;
+    width: 0;
+}
+table tfoot .data_info input[type="number"]::-webkit-inner-spin-button,
+table tfoot .data_info input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
 table tr.disabled td.actions {
     align-items: center;
     display: flex;
-    gap:4px;
+    gap: 4px;
 }
 table tr.disabled td.status {
     cursor: pointer;

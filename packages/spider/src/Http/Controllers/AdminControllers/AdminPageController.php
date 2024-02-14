@@ -33,13 +33,13 @@ class AdminPageController extends Controller
         $allowed = [];
         foreach (self::get_allowed_pages() as $page) {
             if ($page['page_status'] && $page['page_can_display'])
-            $allowed[] = $page;
+                $allowed[] = $page;
         }
         return $allowed;
     }
     static function get_pagegroups()
     {
-        return AdminPagegroup::orderBy('pagegroup_index', 'asc')->get()->toArray();
+        return AdminPagegroup::orderBy('page_group_index', 'asc')->get()->toArray();
     }
     static function get_pages_in_group()
     {
@@ -76,7 +76,7 @@ class AdminPageController extends Controller
             $allowed = [];
             foreach ($tmp_groups[$i]['admin_pages'] as $page) {
                 if ($page['page_status'] && $page['page_can_display'])
-                $allowed[] = $page;
+                    $allowed[] = $page;
             }
             if ($allowed) {
                 $tmp_groups[$i]['admin_pages'] = $allowed;
@@ -88,8 +88,7 @@ class AdminPageController extends Controller
 
     function ui_view_pages()
     {
-        $data = ["pages"=>self::get_pages_with_group()];
-        dd(self::table_response($data,AdminPage::class));
+        $data = ["pages" => self::get_pages_with_group()];
         return view('Spider::Admin.AdminPage.view_pages', $data);
     }
     function ui_create_page()
@@ -104,7 +103,7 @@ class AdminPageController extends Controller
     }
     function ui_view_groups()
     {
-        $data = [];
+        $data = ["pagegroups" => self::get_pagegroups()];
         return view('Spider::Admin.AdminPage.view_groups', $data);
     }
     function ui_create_group()
@@ -147,6 +146,11 @@ class AdminPageController extends Controller
         return self::web_response($result);
     }
 
+    function api_view_pages(Request $request)
+    {
+        $data = ['pages' => AdminPage::offset($request->fetched_from - 1 ?? 0)->limit($request->limit ?? self::API_LIMIT)->get()->toArray()];
+        return self::table_response($data, AdminPage::class);
+    }
     function api_create_page(Request $request)
     {
         // To-Do

@@ -5,7 +5,7 @@
 @section('main')
     <main>
         <section class="table">
-            <table class="head-stick">
+            <table class="vu-table head-stick">
                 <thead>
                     <tr>
                         <td colspan="100%">
@@ -13,7 +13,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><input type="checkbox" id=""></th>
                         <th>Sr.</th>
                         <th>Page Title</th>
                         <th>Page Group</th>
@@ -24,7 +23,6 @@
                 <tbody>
                     @foreach ($pages as $i => $page)
                         <tr @class(['disabled' => $page['page_status']])>
-                            <th><input type="checkbox" id=""></th>
                             <td class="strong">{{ $i + 1 }}</td>
                             <td>{{ $page['page_title'] }}</td>
                             <td>{{ $page['admin_page_group']['page_group_title'] }}</td>
@@ -41,24 +39,15 @@
                 <tfoot>
                     <tr>
                         <td colspan="100%">
-                            <a href="" class="brand">
-                                <img src="{{ url('vector/spider/images/logo_full.png') }}" alt="">
-                            </a>
-                            <div class="data_info">
-                                <div class="rows"></div>
-                                <div class="paginate">
-                                    <div class="previous_page"></div>
-                                    <div class="current_page"></div>
-                                    <div class="next_page"></div>
-                                </div>
+                            <div class="rflex jcsb">
+                                <a href="" class="brand">
+                                    <img src="{{ url('vector/spider/images/logo_full.png') }}" alt="">
+                                </a>
                             </div>
                         </td>
                     </tr>
                 </tfoot>
             </table>
         </section>
-        <template id="table_column">
-            
-        </template>
     </main>
 @endsection

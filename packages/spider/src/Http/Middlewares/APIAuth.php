@@ -46,7 +46,7 @@ class APIAuth
             if (!$pg) return Controller::api_response(['success' => false, "msg" => "Target Endpoint does not exist."]);
 
             /** Get Pages allowed to current user */
-            $permissions = $empCon->get_permitted_pages();
+            $permissions = $admin['admin_role']['role_permissions'];
 
             /** Checking if page is not disable Or permitted */
             if (!($pg->page_status && (in_array($pg->id, $permissions) || $permissions[0] == '*'))) {

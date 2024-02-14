@@ -57,10 +57,11 @@ class Controller extends BaseController
     static function table_response($data, $model)
     {
         $data['total_entries'] = $model::count();
-        $data['current_page'] = request()->page ?? 0;
         $data['page_limit'] = request()->limit ?? self::API_LIMIT;
-        $data['total_pages'] = ceil($data['total_entries'] / $data['page_limit']);
-        $data['fetched_from'] = request()->from ?? 0;
+        $data['total_pages'] = intval(ceil($data['total_entries'] / $data['page_limit']));
+        $from = request()->fetched_from ?? 1;
+        $data['fetched_from'] = $from > 0 ? $from : 0;
+        $data['current_page'] = intval(ceil($data['fetched_from'] / $data['page_limit']))+1;
         $data['has_more'] = $data['total_entries'] > $data['fetched_from'] + $data['page_limit'];
 
         return self::api_response($data);

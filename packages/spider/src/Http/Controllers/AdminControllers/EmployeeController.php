@@ -18,7 +18,8 @@ class EmployeeController extends Controller
     }
     function get_empById($empId)
     {
-        return Employee::with('admin_role')->find($empId)->toArray();
+        $emp = Employee::with('admin_role')->find($empId);
+        return $emp->toArray();
     }
     function get_empByUsername($empUsername)
     {
@@ -36,7 +37,7 @@ class EmployeeController extends Controller
 
     function ui_login()
     {
-        return session()->has('adminId')?redirect()->route('admin_home'):view('Spider::Admin.login');
+        return session()->has('adminId') ? redirect()->route('admin_home') : view('Spider::Admin.login');
     }
     function ui_view_emps()
     {
@@ -183,7 +184,7 @@ class EmployeeController extends Controller
             if (!$ed['emp_status']) {
                 return ["success" => false, "msg" => "Contact HR"];
             } else if ($ed['emp_password'] == $params['password']) {
-                $jwt= JWT::generate(["adminId" => $ed['id']], false);
+                $jwt = JWT::generate(["adminId" => $ed['id']], false);
                 Cookie::queue('jwt', $jwt);
                 return ["success" => true, "adminId" => $ed['id']];
             }
