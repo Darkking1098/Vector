@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get("cool",function(){
-    return "Cool";
+Route::get('developer',function(){
+    return view('Spider::user.developer');
 });

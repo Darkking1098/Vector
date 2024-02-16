@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url('css/vector.css') }}">
-    <link rel="stylesheet" href="{{ url('vector/spider/css/admin/login.css') }}">
-    <link rel="stylesheet" href="{{ url('vector/spider/css/admin/theme.css') }}">
+    <link rel="stylesheet" href="{{ url('css/style.php') }}">
+    <link rel="stylesheet" href="{{ url('css/admin/login.css') }}">
 </head>
 
 <body>
@@ -17,7 +16,7 @@
             <div class="form_details">
                 @csrf
                 <div class="img_wrap">
-                    <img src="{{ url('vector/spider/images/logo.png') }}" alt="Vector Logo">
+                    <img src="{{ url('images/web assets/logo.png') }}" alt="Vector Logo">
                 </div>
                 <h4 id="form_title">Admin Verification</h4>
             </div>
@@ -49,7 +48,7 @@
     </main>
     <script src="{{ url('js/vector.js') }}"></script>
     <script>
-        $('#form_title').VU.VUText.split();
+        $('#form_title').VU.VText.split();
     </script>
 </body>
 

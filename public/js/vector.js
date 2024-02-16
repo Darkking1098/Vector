@@ -60,14 +60,12 @@
         constructor(node) {
             this.node = node;
             node.VU = this;
-            VUNode.plugins.forEach((plugin) => {
-                this[plugin.name] = new plugin(this);
-            });
+            VUNode.plugins.forEach((plugin) => new plugin(this));
             return this.node;
         }
-        $(selector){
+        $(selector) {
             return new VUNodeList([...this.node.querySelectorAll(selector)]);
-        };
+        }
         get(attr) {
             return this.node.getAttribute(attr);
         }
@@ -208,9 +206,10 @@
 })();
 
 (() => {
-    class VUText {
+    class VText {
         constructor(VUNode) {
             this.VUNode = VUNode;
+            this.VUNode.VText = this;
             this.node = this.VUNode.node;
         }
         split() {
@@ -221,5 +220,5 @@
             }
         }
     }
-    VU.VUNode.registerPlugin(VUText);
+    VU.VUNode.registerPlugin(VText);
 })();

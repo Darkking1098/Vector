@@ -3,8 +3,8 @@
 namespace Vector\Spider\Http\Controllers\AdminControllers;
 
 use Illuminate\Http\Client\Request;
-use Vector\Spider\database\Models\WebImage;
-use Vector\Spider\database\Models\WebPage;
+use Vector\Spider\Models\WebImage;
+use Vector\Spider\Models\WebPage;
 use Vector\Spider\Http\Controllers\BaseControllers\SEOBase;
 
 class SEOController extends SEOBase

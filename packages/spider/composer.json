@@ -1,7 +1,6 @@
 {
     "name": "vector/spider",
-    "description": "Scalable and Expandable web admin panel.",
-    "type": "librry",
+    "description": "Modern way to organize your admins",
     "autoload": {
         "psr-4": {
             "Vector\\Spider\\": "src/"

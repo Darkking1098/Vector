@@ -5,36 +5,12 @@ namespace Vector\Spider\Http\Controllers\AdminControllers;
 use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
-use Vector\Spider\database\Models\AdminRole;
-use Vector\Spider\database\Models\Employee;
+use Vector\Spider\Models\AdminRole;
+use Vector\Spider\Models\Employee;
 use Vector\Spider\Http\Controllers\Controller;
-use Vector\Spider\Http\Security\JWT;
 
 class EmployeeController extends Controller
 {
-    function get_allemps()
-    {
-        return Employee::with('admin_role')->get()->toArray();
-    }
-    function get_empById($empId)
-    {
-        $emp = Employee::with('admin_role')->find($empId);
-        return $emp->toArray();
-    }
-    function get_empByUsername($empUsername)
-    {
-        return Employee::where('emp_username', $empUsername)->with('admin_role')->first()->toArray();
-    }
-    function get_self()
-    {
-        return self::get_empById(session()->get('adminId'));
-    }
-    function get_permitted_pages()
-    {
-        $role = self::get_self()['admin_role'];
-        return $role['role_permissions'];
-    }
-
     function ui_login()
     {
         return session()->has('adminId') ? redirect()->route('admin_home') : view('Spider::Admin.login');
@@ -184,8 +160,8 @@ class EmployeeController extends Controller
             if (!$ed['emp_status']) {
                 return ["success" => false, "msg" => "Contact HR"];
             } else if ($ed['emp_password'] == $params['password']) {
-                $jwt = JWT::generate(["adminId" => $ed['id']], false);
-                Cookie::queue('jwt', $jwt);
+                // $jwt = JWT::generate(["adminId" => $ed['id']], false);
+                // Cookie::queue('jwt', $jwt);
                 return ["success" => true, "adminId" => $ed['id']];
             }
         }

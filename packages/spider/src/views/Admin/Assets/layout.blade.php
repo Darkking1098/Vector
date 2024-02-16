@@ -1,30 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('Spider::user.assets.base_layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url('css/vector.css') }}">
+@section('styles')
+    <!-- Icon Stylesheets -->
     <link rel="stylesheet" href="{{ url('icon/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ url('vector/spider/css/admin/sidebar.css') }}">
-    <link rel="stylesheet" href="{{ url('vector/spider/css/admin/theme.css') }}">
+    <!-- Vector Stylesheets -->
+    <link rel="stylesheet" href="{{ url('css/style.php') }}">
+    <!-- Other Stylesheets -->
+    <style>
+        .page_details {
+            padding: 30px 35px 0;
+        }
+    </style>
     @stack('css')
-</head>
+@endsection
 
-<body>
-    <div class="sidebar_layout">
-        @include('Spider::Admin.Assets.sidebar')
-        <div class="main_content">
-            @include('Spider::Admin.Assets.header')
-            @yield('main')
-            @include('Spider::Admin.Assets.footer')
-            @stack('extra')
+@section('body')
+
+    <body>
+        <div class="sidebar_layout">
+            <div class="sidebar"></div>
+            <div class="main_content">
+                @includeIf('user.assets.header')
+                @yield('main')
+                @includeIf('user.assets.footer')
+            </div>
         </div>
-    </div>
-    <script src="{{ url('js/vector.js') }}"></script>
-    @stack('js')
-</body>
-
-</html>
+        @stack('other')
+        <!-- Main Scripts -->
+        <script src="http://localhost:5958/js/vector.js"></script>
+        <!-- Other Scripts -->
+    </body>
+@endsection

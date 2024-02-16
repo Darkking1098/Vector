@@ -1,6 +1,5 @@
 @php
     $cont = Vector\Spider\Http\Controllers\AdminControllers\AdminPageController::class;
-    $groups = $cont::get_display_pages_in_group();
 @endphp
 <div class="sidebar">
     <a href="{{ url('') }}" class="brand">

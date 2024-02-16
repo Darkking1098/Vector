@@ -1,0 +1,75 @@
+section.hero {
+    position: relative;
+    isolation: isolate;
+}
+section.hero .bg {
+    inset: 0;
+    top: calc(-1 * var(--header));
+    position: absolute;
+    z-index: -1;
+}
+#root {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+body:has(.sidebar_layout) {
+    overflow: hidden;
+    min-height: unset;
+    height: 100%;
+}
+
+.sidebar_layout {
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+}
+.sidebar_layout .sidebar {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+.sidebar_layout .main_content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.sidebar_layout .main_content header {
+    display: none;
+}
+
+.filter_layout {
+    display: flex;
+}
+.filter_layout .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    position: sticky;
+    top: calc(var(--height) + var(--buff, 20px));
+}
+.filter_layout .main_content {
+    flex-grow: 1;
+}
+@media screen and (max-width: 900px) {
+    .sidebar_layout .sidebar {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        transform: translateX(100%);
+        transition: all 0.4s;
+        z-index: 99;
+    }
+    .sidebar_layout .sidebar.active {
+        transform: translateX(0);
+        box-shadow: 0 0 80px 0 #00000088;
+    }
+    .sidebar_layout .main_content header {
+        display: flex;
+        align-items: center;
+    }
+}

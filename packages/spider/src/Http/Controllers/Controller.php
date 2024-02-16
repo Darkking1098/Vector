@@ -8,7 +8,6 @@ use Illuminate\Routing\Controller as BaseController;
 
 use Illuminate\Support\Str;
 
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
@@ -51,19 +50,5 @@ class Controller extends BaseController
     static function api_response($result)
     {
         return response()->json($result + ["timestamp" => time()]);
-    }
-
-    // Table Response
-    static function table_response($data, $model)
-    {
-        $data['total_entries'] = $model::count();
-        $data['page_limit'] = request()->limit ?? self::API_LIMIT;
-        $data['total_pages'] = intval(ceil($data['total_entries'] / $data['page_limit']));
-        $from = request()->fetched_from ?? 1;
-        $data['fetched_from'] = $from > 0 ? $from : 0;
-        $data['current_page'] = intval(ceil($data['fetched_from'] / $data['page_limit']))+1;
-        $data['has_more'] = $data['total_entries'] > $data['fetched_from'] + $data['page_limit'];
-
-        return self::api_response($data);
     }
 }

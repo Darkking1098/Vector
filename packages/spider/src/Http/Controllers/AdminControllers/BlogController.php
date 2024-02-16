@@ -3,8 +3,8 @@
 namespace Vector\Spider\Http\Controllers\AdminControllers;
 
 use Illuminate\Http\Request;
-use Vector\Spider\database\Models\Blog;
-use Vector\Spider\database\Models\BlogCategory;
+use Vector\Spider\Models\Blog;
+use Vector\Spider\Models\BlogCategory;
 use Vector\Spider\Http\Controllers\BaseControllers\BlogBase;
 
 class BlogController extends BlogBase
