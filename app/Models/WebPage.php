@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 use App\Models\Component;
 use Vector\Spider\Models\WebPage as ModelsWebPage;
 

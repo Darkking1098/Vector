@@ -68,7 +68,6 @@
 @push('js')
     <script>
         $('.v-copy').VU.perform((x) => {
-            console.log(x.VUText);
             x.node.addEventListener('click', () => {
                 var copyText = $(`#${x.get('data-copy')}`).innerText;
                 navigator.clipboard.writeText(copyText);
