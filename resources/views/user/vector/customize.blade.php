@@ -4,7 +4,7 @@
 @extends('user.assets.layout')
 @push('css')
     <style>
-        a.btn{
+        a.vu-btn{
             background: var(--info);
             color: white;
         }
@@ -17,8 +17,8 @@
             <x-breadcrumb :path="$path"></x-breadcrumb>
         </div>
         <div class="files rflex jcc" style="gap:20px;margin-top:40px">
-            <a href="{{ url('vector/customize/css') }}" class="btn">Css File</a>
-            <a href="{{ url('vector/customize/js') }}" class="btn">Js File</a>
+            <a href="{{ url('vector/customize/css') }}" class="vu-btn">Css File</a>
+            <a href="{{ url('vector/customize/js') }}" class="vu-btn">Js File</a>
         </div>
     </main>
 @endsection

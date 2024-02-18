@@ -6,9 +6,10 @@
     <!-- Vector Stylesheets -->
     <link rel="stylesheet" href="{{ url('css/style.php') }}">
     <!-- Other Stylesheets -->
+    <link rel="stylesheet" href="{{ url('css/admin/sidebar.css') }}">
     <style>
-        .page_details {
-            padding: 30px 35px 0;
+        main{
+            padding:25px 30px;
         }
     </style>
     @stack('css')
@@ -18,16 +19,17 @@
 
     <body>
         <div class="sidebar_layout">
-            <div class="sidebar"></div>
+            @include('Spider::admin.assets.sidebar')
             <div class="main_content">
-                @includeIf('user.assets.header')
+                @includeIf('admin.assets.header')
                 @yield('main')
-                @includeIf('user.assets.footer')
+                @includeIf('admin.assets.footer')
             </div>
         </div>
         @stack('other')
         <!-- Main Scripts -->
-        <script src="http://localhost:5958/js/vector.js"></script>
+        <script src="{{ url('js/vector.js') }}"></script>
         <!-- Other Scripts -->
+        @stack('js')
     </body>
 @endsection

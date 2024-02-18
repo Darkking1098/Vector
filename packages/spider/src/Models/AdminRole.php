@@ -31,7 +31,8 @@ class AdminRole extends Model
 
 	protected $casts = [
 		'role_sensitive' => 'int',
-		'role_status' => 'int'
+		'role_status' => 'int',
+		'role_permissions'=>'array',
 	];
 
 	protected $fillable = [

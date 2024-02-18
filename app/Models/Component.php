@@ -13,12 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  * Class Component
  * 
  * @property int $id
- * @property int $slud_id
+ * @property int $slug_id
  * @property string $component_title
  * @property string $component_desc
  * @property string|null $component_html
  * @property string|null $component_css
  * @property string|null $component_js
+ * @property string $component_class
  * 
  * @property WebPage $web_page
  * @property Collection|Varient[] $varients
@@ -31,21 +32,22 @@ class Component extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'slud_id' => 'int'
+		'slug_id' => 'int'
 	];
 
 	protected $fillable = [
-		'slud_id',
+		'slug_id',
 		'component_title',
 		'component_desc',
 		'component_html',
 		'component_css',
-		'component_js'
+		'component_js',
+		'component_class'
 	];
 
 	public function web_page()
 	{
-		return $this->belongsTo(WebPage::class, 'slud_id');
+		return $this->belongsTo(WebPage::class, 'slug_id');
 	}
 
 	public function varients()

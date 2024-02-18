@@ -49,7 +49,7 @@ Route::prefix('components')->group(function () {
     Route::prefix('{component}')->group(function ($component) {
         Route::get('', function ($component) {
             $slug = WebPage::where('webpage_slug', "components/$component")->first()->toArray();
-            $data = ['component' => Component::where('slud_id', $slug['id'])->with('varients')->first()->toArray()];
+            $data = ['component' => Component::where('slug_id', $slug['id'])->with('varients')->first()->toArray()];
             return view('user.varients', $data);
         });
         Route::get('{varient}', function ($component, $varient) {

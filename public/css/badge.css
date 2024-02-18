@@ -1,4 +1,4 @@
-i:is(.text,.badge) {
+i:is(.text, .badge) {
     font-size: 0.7em;
 }
 i.badge {
@@ -6,31 +6,31 @@ i.badge {
     border-radius: 10px;
     font-weight: 500;
 }
-i.icon{
-    font-size: 01em;
-    width: 1.8em;
+i.icon {
+    width: 36px;
     cursor: pointer;
+    padding: 0;
     aspect-ratio: 1;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-i:is(.text,.badge).prime {
+i:is(.text, .badge).prime {
     color: var(--prime);
 }
-i:is(.text,.badge).sec {
+i:is(.text, .badge).sec {
     color: var(--gray_500);
 }
-i:is(.text,.badge).success {
+i:is(.text, .badge).success {
     color: var(--success);
 }
-i:is(.text,.badge).error {
+i:is(.text, .badge).error {
     color: var(--error);
 }
-i:is(.text,.badge).warn {
+i:is(.text, .badge).warn {
     color: var(--warn);
 }
-i:is(.text,.badge).info {
+i:is(.text, .badge).info {
     color: var(--info);
 }
 .bg-prime {

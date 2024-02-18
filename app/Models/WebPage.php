@@ -9,6 +9,6 @@ class WebPage extends ModelsWebPage
 {
     public function components()
     {
-        return $this->hasMany(Component::class, 'slud_id');
+        return $this->hasMany(Component::class, 'slug_id');
     }
 }

@@ -28,9 +28,12 @@
             font-weight: 600;
             color: var(--gray_600);
             margin-block: 6px 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        a.btn {
+        a.vu-btn {
             background: var(--prime);
             color: white;
             transition: all 0.2s;
@@ -38,7 +41,7 @@
             margin-top: 10px;
         }
 
-        a.btn:hover {
+        a.vu-btn:hover {
             background: var(--prime_dark);
         }
     </style>
@@ -55,7 +58,7 @@
                     <h5 class="component_title">{{ $component['component_title'] }}</h5>
                     <p class="component_desc">{{ $component['component_desc'] }}</p>
                     <i class="badge info bg-info ass">{{ $component['varients_count'] }} Varient Available</i>
-                    <a href="{{ $component['web_page']['webpage_slug'] }}" class="btn">View All</a>
+                    <a href="{{ $component['web_page']['webpage_slug'] }}" class="vu-btn">View All</a>
                 </div>
             @endforeach
         </div>

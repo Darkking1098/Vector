@@ -9,6 +9,57 @@ use Vector\Spider\Models\AdminPageGroup;
 
 class AdminPageController extends Controller
 {
+    static function get_groups()
+    {
+        return AdminPageGroup::withCount('admin_pages')->get()->toArray();
+    }
+    static function get_groupById($groupId)
+    {
+        return AdminPageGroup::with('admin_pages')->find($groupId);
+    }
+    static function get_groupsWithPages()
+    {
+        return AdminPageGroup::with(['admin_pages' => function ($query) {
+            $query->where('page_status', 1)->where('page_can_display', 1);
+        }])->orderBy('page_group_index')->get()->toArray();
+    }
+    static function get_groupsWithAllPages()
+    {
+        return AdminPageGroup::with('admin_pages')->orderBy('page_group_index')->get()->toArray();
+    }
+    static function get_groupsWithActivePages()
+    {
+        return AdminPageGroup::with(['admin_pages' => function ($query) {
+            $query->where('page_status', 1);
+        }])->orderBy('page_group_index')->get()->toArray();
+    }
+    static function get_pages()
+    {
+        return AdminPage::all()->toArray();
+    }
+    static function get_pageById($pageId)
+    {
+        return AdminPage::with('admin_page_group')->find($pageId);
+    }
+    static function get_allowedPages()
+    {
+        $groups = [];
+        $temp_pages = self::get_groupsWithPages();
+        $permitted = EmployeeController::get_self()['admin_role']['role_permissions'];
+        if ($permitted[0] == "*") return $temp_pages;
+        for ($i = 0; $i < count($temp_pages); $i++) {
+            $allowed = [];
+            foreach ($temp_pages[$i]['admin_pages'] as $page) {
+                if (in_array($page['id'], $permitted)) $allowed[] = $page;
+            }
+            if ($allowed) {
+                $temp_pages[$i]['admin_pages'] = $allowed;
+                $groups[] = $temp_pages[$i];
+            }
+        }
+        return $groups;
+    }
+
     function ui_view_pages()
     {
         $data = [];
@@ -71,7 +122,6 @@ class AdminPageController extends Controller
 
     function api_view_pages(Request $request)
     {
-        
     }
     function api_create_page(Request $request)
     {

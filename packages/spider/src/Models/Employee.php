@@ -62,7 +62,7 @@ class Employee extends Model
 
 	public function admin_role()
 	{
-		return $this->belongsTo(AdminRole::class);
+		return $this->belongsTo(AdminRole::class)->select('id', 'role_title', 'role_permissions');
 	}
 
 	public function employee_team()

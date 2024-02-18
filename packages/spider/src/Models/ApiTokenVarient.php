@@ -28,7 +28,8 @@ class ApiTokenVarient extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'api_varient_status' => 'int'
+		'api_varient_status' => 'int',
+		'api_varient_permissions'=>'array',
 	];
 
 	protected $fillable = [

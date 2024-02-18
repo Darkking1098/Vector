@@ -65,11 +65,9 @@ class SEOController extends SEOBase
         self::web_response($result);
     }
 
-    function api_add_webpage(Request $request)
+    function api_add_webpage($params)
     {
-        $params = null;
-        $result = self::add_webpage($params);
-        self::api_response($result);
+        self::api_response(self::add_webpage($params));
     }
     function api_edit_webpage(Request $request, $webpageId)
     {
@@ -96,27 +94,27 @@ class SEOController extends SEOBase
         self::api_response($result);
     }
 
-    private function add_webpage($params)
+    static function add_webpage($params)
     {
-        $webpage = new WebPage();
-        return ["success" => $webpage->save()];
+        $webpage = new WebPage($params);
+        return ["success" => $webpage->save(), 'webpage_id' => $webpage->id];
     }
-    private function edit_webpage($webpageId, $params)
-    {
-        $webpage = WebPage::find($webpageId);
-        return ["success" => $webpage->save()];
-    }
-    private function toggle_webpage_status($webpageId, $params)
+    static function edit_webpage($webpageId, $params)
     {
         $webpage = WebPage::find($webpageId);
         return ["success" => $webpage->save()];
     }
-    private function upload_webimages($params)
+    static function toggle_webpage_status($webpageId, $params)
+    {
+        $webpage = WebPage::find($webpageId);
+        return ["success" => $webpage->save()];
+    }
+    static function upload_webimages($params)
     {
         $webimageId = new WebImage();
         return ["success" => $webimageId->save()];
     }
-    private function edit_webimage($webimageId, $params)
+    static function edit_webimage($webimageId, $params)
     {
         $webimageId = WebImage::find($webimageId);
         return ["success" => $webimageId->save()];

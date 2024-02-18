@@ -26,7 +26,7 @@
             margin-block: 6px 8px;
         }
 
-        a.btn {
+        a.vu-btn {
             background: var(--prime);
             color: white;
             transition: all 0.2s;
@@ -34,7 +34,7 @@
             margin-top: 10px;
         }
 
-        a.btn:hover {
+        a.vu-btn:hover {
             background: var(--prime_dark);
         }
 
@@ -69,7 +69,7 @@
                     <div class="varient_details">
                         <h5 class="varient_title">{{ $varient['varient_title'] }}</h5>
                         <p class="varient_desc">{{ $varient['varient_desc'] }}</p>
-                        <a href="" class="btn">View All</a>
+                        <a href="" class="vu-btn">View All</a>
                     </div>
                 </div>
             @endforeach

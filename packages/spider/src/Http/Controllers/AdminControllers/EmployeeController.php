@@ -11,6 +11,13 @@ use Vector\Spider\Http\Controllers\Controller;
 
 class EmployeeController extends Controller
 {
+    static function get_empById($empId){
+        return Employee::with('admin_role')->find($empId);
+    }
+    static function get_self(){
+        return self::get_empById(session()->get('adminId'));
+    }
+
     function ui_login()
     {
         return session()->has('adminId') ? redirect()->route('admin_home') : view('Spider::Admin.login');
